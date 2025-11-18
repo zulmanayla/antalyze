@@ -8,10 +8,10 @@ st.set_page_config(
 )
 
 # Gambar lokal
-image_path = "antalyze/Calming pixel art landscape.jpg"
-judul_path = "antalyze/judul.png"
-teks_path = "antalyze/Pink and Blue Colorful Playful Cute Pixel Illustrative Trivia Quiz Presentation.png"
-wm_path = "antalyze/wm.png"
+image_path = "Calming pixel art landscape.jpg"
+judul_path = "judul.png"
+teks_path = "Pink and Blue Colorful Playful Cute Pixel Illustrative Trivia Quiz Presentation.png"
+wm_path = "wm.png"
 
 # Membaca gambar lokal dan ubah jadi base64
 def get_base64_of_image(image_path):
@@ -131,5 +131,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 
