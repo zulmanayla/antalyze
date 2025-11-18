@@ -107,9 +107,9 @@ def get_base64_image(path):
         return base64.b64encode(f.read()).decode()
 
 # Path lokal Anda
-image_path = "antalyze/Calming pixel art landscape.jpg"
-judul_path = "antalyze/sisipkan.png"
-banner_path = "antalyze/banner.png"
+image_path = "Calming pixel art landscape.jpg"
+judul_path = "sisipkan.png"
+banner_path = "banner.png"
 
 try:
     bg_image = get_base64_image(image_path)
@@ -381,3 +381,4 @@ if run_btn:
 
 if __name__ == "__main__":
     mp.freeze_support()
+
