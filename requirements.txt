@@ -10,3 +10,4 @@ scikit-image
 torchvision
 numba
 stegano
+cv2
