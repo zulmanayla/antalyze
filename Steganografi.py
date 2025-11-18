@@ -7,17 +7,19 @@ st.set_page_config(
     layout="wide",
 )
 
+# Gambar lokal
+image_path = "antalyze/Calming pixel art landscape.jpg"
+judul_path = "antalyze/judul.png"
+teks_path = "antalyze/Pink and Blue Colorful Playful Cute Pixel Illustrative Trivia Quiz Presentation.png"
+wm_path = "antalyze/wm.png"
+
 # Membaca gambar lokal dan ubah jadi base64
 def get_base64_of_image(image_path):
     with open(image_path, "rb") as f:
         data = f.read()
     return base64.b64encode(data).decode()
 
-# Gambar lokal
-image_path = "antalyze/Calming pixel art landscape.jpg"
-judul_path = "antalyze/judul.png"
-teks_path = "antalyze/Pink and Blue Colorful Playful Cute Pixel Illustrative Trivia Quiz Presentation.png"
-wm_path = "antalyze/wm.png"
+
 
 bg_image = get_base64_of_image(image_path)
 judul_base64 = get_base64_of_image(judul_path)
@@ -129,4 +131,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
