@@ -107,9 +107,9 @@ def get_base64_image(path):
         return base64.b64encode(f.read()).decode()
 
 # Path lokal Anda
-image_path = "D:\\Naya Geming\\steganografi pcd\\Calming pixel art landscape.jpg"
-judul_path = "D:\\Naya Geming\\steganografi pcd\\sisipkan.png"
-banner_path = "D:\\Naya Geming\\steganografi pcd\\banner.png"
+image_path = "antalyze/Calming pixel art landscape.jpg"
+judul_path = "antalyze/sisipkan.png"
+banner_path = "antalyze/banner.png"
 
 try:
     bg_image = get_base64_image(image_path)
