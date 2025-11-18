@@ -1,6 +1,6 @@
 streamlit
 numpy
-opencv-python-headless==4.8.1.78
+opencv-python
 Pillow
 matplotlib
 tqdm
@@ -8,10 +8,7 @@ scikit-image
 numba
 stegano
 lpips
-pip==25.3
 
-# Torch CPU-only
-torch==2.0.1+cpu
-torchvision==0.15.2+cpu
---extra-index-url https://download.pytorch.org/whl/cpu
-
+# Torch + Torchvision (CPU) untuk Python 3.10–3.12
+torch
+torchvision
