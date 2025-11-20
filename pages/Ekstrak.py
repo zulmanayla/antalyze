@@ -63,25 +63,22 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # --- Sidebar CSS ---
 st.markdown("""
-    <style>
-    [data-testid="stSidebar"] {
-        background-color: #87CEFA; 
-    }
-    [data-testid="stSidebar"] * {
-        color: #FFFFFF !important;
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 25px !important; 
-    }
-    div[data-testid="stRadio"] label:hover {
-        background-color: #1E90FF;
-        border-radius: 10px;
-    }
-    div[data-testid="stRadio"] input:checked + div {
-        color: #FFFFFF !important;
-        font-weight: bold;
-    }
-    </style>
+<style>
+[data-testid="stSidebar"] {
+    background-color: #87CEFA; 
+}
+[data-testid="stSidebar"] * {
+    color: #FFFFFF !important;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 25px !important;
+}
+div[data-testid="stRadio"] label:hover {
+    background-color: #1E90FF;
+    border-radius: 10px;
+}
+</style>
 """, unsafe_allow_html=True)
+
 
 # --- Title image ---
 st.markdown(
@@ -150,5 +147,6 @@ if uploaded_image:
                     st.warning("Tidak ditemukan pesan tersembunyi.")
             except Exception:
                 st.error("Tidak ditemukan pesan tersembunyi.")
+
 
 
