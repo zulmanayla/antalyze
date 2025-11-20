@@ -166,7 +166,6 @@ header[data-testid="stHeader"] {
 """, unsafe_allow_html=True)
 
 
-# Sidebar style (sama seperti sebelumnya)
 st.markdown("""
 <style>
 [data-testid="stSidebar"] {
@@ -175,11 +174,11 @@ st.markdown("""
 [data-testid="stSidebar"] * {
     color: #FFFFFF !important;
     font-family: 'Segoe UI', sans-serif;
-    font-size: 18px !important;
+    font-size: 25px !important;
 }
-h3, .subheader-text, label, p {
-    color: white !important;
-    font-family: 'Quantico';
+div[data-testid="stRadio"] label:hover {
+    background-color: #1E90FF;
+    border-radius: 10px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -381,4 +380,5 @@ if run_btn:
 
 if __name__ == "__main__":
     mp.freeze_support()
+
 
