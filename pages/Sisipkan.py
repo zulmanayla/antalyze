@@ -9,6 +9,8 @@ import lpips
 from PIL import Image
 import base64
 import multiprocessing as mp
+from io import BytesIO
+
 
 import streamlit as st
 
@@ -16,6 +18,8 @@ import streamlit as st
 from aco_worker import aco_worker
 from aco_impl import resize_for_aco
 from multiprocessing import shared_memory
+
+
 
 
 # Windows-safe multiprocessing
@@ -465,6 +469,7 @@ if run_btn:
 
 if __name__ == "__main__":
     mp.freeze_support()
+
 
 
 
