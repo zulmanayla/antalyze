@@ -14,10 +14,10 @@ def get_base64_of_image(image_path):
     return base64.b64encode(data).decode()
 
 # Gambar lokal
-image_path = Calming pixel art landscape.jpg
-judul_path = judul.png
-teks_path = Pink and Blue Colorful Playful Cute Pixel Illustrative Trivia Quiz Presentation.png
-wm_path = wm.png
+image_path = "Calming pixel art landscape.jpg"
+judul_path = "judul.png"
+teks_path = "Pink and Blue Colorful Playful Cute Pixel Illustrative Trivia Quiz Presentation.png"
+wm_path = "wm.png"
 
 bg_image = get_base64_of_image(image_path)
 judul_base64 = get_base64_of_image(judul_path)
@@ -124,4 +124,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
