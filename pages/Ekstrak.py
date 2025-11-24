@@ -14,8 +14,8 @@ def get_base64_of_image(image_path):
     return base64.b64encode(data).decode()
 
 # --- Paths for background & title ---
-image_path = "D:\\Naya Geming\\steganografi pcd\\Calming pixel art landscape.jpg"
-judul_path = "D:\\Naya Geming\\steganografi pcd\\ekstrak.png"
+image_path = "Calming pixel art landscape.jpg"
+judul_path = "ekstrak.png"
 
 bg_image = get_base64_of_image(image_path)
 judul_path_base64 = get_base64_of_image(judul_path)
@@ -261,3 +261,4 @@ if uploaded_image:
                             st.warning("Tidak ditemukan pesan tersembunyi.")
                 except:
                     st.error("Error dalam proses ekstraksi gambar.")
+
