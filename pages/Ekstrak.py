@@ -17,6 +17,52 @@ judul_path = "ekstrak.png"
 bg_image = get_base64_of_image(image_path)
 judul_path_base64 = get_base64_of_image(judul_path)
 
+def try_extract_as_aco(stego_np):
+    try:
+        data = ACO.load_model("aco_model.pkl")
+
+        ant_paths = data["ant_journeys"][-1]
+
+        extracted_bits = []
+        for (x, y) in ant_paths:
+            extracted_bits.append(str(stego_np[x, y, 0] & 1))
+
+        chars = [chr(int(''.join(extracted_bits[i:i+8]), 2))
+                for i in range(0, len(extracted_bits), 8)]
+        return ''.join(chars)
+
+    except:
+        return None
+
+
+
+
+def try_extract_as_lsb(stego_np):
+    try:
+        h, w, c = stego_np.shape
+        bits = [(stego_np[y, x, ch] & 1) for y in range(h) for x in range(w) for ch in range(c)]
+        length_bits = bits[:16]
+        msg_len = int(''.join(map(str, length_bits)), 2)
+
+        if msg_len <= 0 or msg_len > w*h*c:
+            return None
+
+        msg_bits = bits[16:16+msg_len]
+
+        message_bytes = []
+        for i in range(0, len(msg_bits), 8):
+            chunk = msg_bits[i:i+8]
+            if len(chunk) == 8:
+                message_bytes.append(int(''.join(map(str, chunk)), 2))
+
+        hasil = bytes(message_bytes).decode(errors="ignore")
+        return hasil
+    except:
+        return None
+
+
+
+
 # --- CSS: Font 1 (Quantico), Transparent Toolbar, White Subheaders ---
 st.markdown("""
     <style>
@@ -181,26 +227,37 @@ if uploaded_image:
             unsafe_allow_html=True
         )
 
-    # --- RIGHT COLUMN: Extract hidden message ---
-    with col2:
-    # Geser container kanan sedikit ke bawah
-        st.markdown("""
-        <h3 style='text-align: center; color: white; font-family: Quantico; font-weight: 700; margin-bottom: 10px;'>
-            Hasil Ekstraksi Teks
-        </h3>
-    """, unsafe_allow_html=True)
+   # --- RIGHT COLUMN: Extract hidden message ---
+        with col2:
+            st.markdown("""
+                <h3 style='text-align: center; color: white; font-family: Quantico; font-weight: 700; margin-bottom: 10px;'>
+                    Hasil Ekstraksi Teks
+                </h3>
+            """, unsafe_allow_html=True)
 
+            with st.spinner("Mengekstraksi pesan tersembunyi..."):
+                try:
+                    # convert PIL to numpy
+                    stego_np = np.array(image)
 
-        with st.spinner("Mengekstraksi pesan tersembunyi..."):
-            try:
-                pesan_tersembunyi = lsb.reveal(uploaded_image)
-                if pesan_tersembunyi and pesan_tersembunyi.strip():
-                    st.success("Pesan tersembunyi terdeteksi:")
-                    st.write(pesan_tersembunyi)
-                else:
-                    st.warning("Tidak ditemukan pesan tersembunyi.")
-            except Exception:
-                st.error("Tidak ditemukan pesan tersembunyi.")
+                    # coba sebagai LSB dulu
+                    pesan_tersembunyi = try_extract_as_lsb(stego_np)
+
+                    if pesan_tersembunyi and pesan_tersembunyi.strip():
+                        st.success("Pesan terdeteksi (LSB):")
+                        st.write(pesan_tersembunyi)
+
+                    else:
+                        # jika LSB gagal → coba ACO
+                        pesan_tersembunyi = try_extract_as_aco(stego_np)
+
+                        if pesan_tersembunyi and pesan_tersembunyi.strip():
+                            st.success("Pesan terdeteksi (ACO):")
+                            st.write(pesan_tersembunyi)
+                        else:
+                            st.warning("Tidak ditemukan pesan tersembunyi.")
+                except:
+                    st.error("Error dalam proses ekstraksi gambar.")
 
 
 
