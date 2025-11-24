@@ -64,21 +64,75 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 # --- Sidebar CSS ---
 st.markdown("""
 <style>
+/* ===== Preload Material Icons agar tidak glitch ===== */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v126/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+}
+.material-icons {
+    font-family: 'Material Icons' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+}
+
+/* ===== Sidebar Styling ===== */
 [data-testid="stSidebar"] {
     background-color: #87CEFA; 
 }
+
 [data-testid="stSidebar"] * {
     color: #FFFFFF !important;
     font-family: 'Segoe UI', sans-serif;
-    font-size: 25px !important;
+    font-size: 25px !important; 
 }
+
 div[data-testid="stRadio"] label:hover {
     background-color: #1E90FF;
     border-radius: 10px;
 }
-</style>
-""", unsafe_allow_html=True)
 
+div[data-testid="stRadio"] input:checked + div {
+    color: #FFFFFF !important;
+    font-weight: bold;
+}
+
+/* ===== Toolbar Transparan ===== */
+[data-testid="stToolbar"] {
+    background-color: transparent !important;
+    backdrop-filter: blur(0px) !important;
+    box-shadow: none !important;
+}
+
+/* Hilangkan garis bawah header */
+header[data-testid="stHeader"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* ===== Perbaikan Ikon Collapse (selalu pakai Material Icons) ===== */
+button[kind="headerNoPadding"] span[data-testid="stIconMaterial"] {
+    font-family: 'Material Icons' !important;
+    font-size: 24px !important;
+    color: white !important;
+    opacity: 0.9;
+    margin-top: 2px;
+}
+</style>
+
+<!-- Force preload font lebih awal -->
+<link rel="preload" href="https://fonts.gstatic.com/s/materialicons/v126/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2" as="font" type="font/woff2" crossorigin>
+""", unsafe_allow_html=True)
 
 # --- Title image ---
 st.markdown(
@@ -147,6 +201,7 @@ if uploaded_image:
                     st.warning("Tidak ditemukan pesan tersembunyi.")
             except Exception:
                 st.error("Tidak ditemukan pesan tersembunyi.")
+
 
 
 
