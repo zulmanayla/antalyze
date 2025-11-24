@@ -366,7 +366,25 @@ if run_btn:
         st.write(f"MSE: {metrics['mse']:.5f}")
         st.write(f"NC: {metrics['nc']:.4f}")
         st.write(f"LPIPS: {metrics['lpips']:.4f}")
+        # pastikan stego_np adalah np.ndarray dtype uint8 dan shape (h,w,3)
+        stego_np = lsb_embed(cover_np, message_input).astype(np.uint8)
 
+        # convert to PIL and ensure RGB
+        stego_pil = Image.fromarray(stego_np, mode="RGB")
+        
+
+        # prepare bytes for download (PNG lossless)
+        buf = BytesIO()
+        stego_pil.save(buf, format="PNG")
+        buf.seek(0)
+        st.download_button(
+            label="⬇️ Download Stego (PNG)",
+            data=buf.getvalue(),
+            file_name="stego_lsb.png",
+            mime="image/png"
+        )
+
+        
         st.stop()
 
     # ---------- ACO PARALLEL ----------
@@ -427,6 +445,18 @@ if run_btn:
         st.write(f"MSE: {metrics['mse']:.6f}")
         st.write(f"NC: {metrics['nc']:.4f}")
         st.write(f"LPIPS: {metrics['lpips']:.4f}")
+         # ==== Download tombol untuk ACO ====
+        stego_pil = Image.fromarray(stego.astype(np.uint8))
+        buf = BytesIO()
+        stego_pil.save(buf, format="PNG")
+        buf.seek(0)
+
+        st.download_button(
+            label=f"⬇️ Download Gambar (ACO – {ants} semut)",
+            data=buf.getvalue(),
+            file_name=f"stego_aco_{ants}.png",
+            mime="image/png"
+        )
 
         st.markdown("---")
 # =========================
@@ -435,6 +465,7 @@ if run_btn:
 
 if __name__ == "__main__":
     mp.freeze_support()
+
 
 
 
