@@ -9,8 +9,6 @@ import lpips
 from PIL import Image
 import base64
 import multiprocessing as mp
-from io import BytesIO
-
 
 import streamlit as st
 
@@ -18,8 +16,6 @@ import streamlit as st
 from aco_worker import aco_worker
 from aco_impl import resize_for_aco
 from multiprocessing import shared_memory
-
-
 
 
 # Windows-safe multiprocessing
@@ -370,10 +366,7 @@ if run_btn:
         st.write(f"MSE: {metrics['mse']:.5f}")
         st.write(f"NC: {metrics['nc']:.4f}")
         st.write(f"LPIPS: {metrics['lpips']:.4f}")
-        # pastikan stego_np adalah np.ndarray dtype uint8 dan shape (h,w,3)
 
-       
-        
         st.stop()
 
     # ---------- ACO PARALLEL ----------
@@ -434,8 +427,6 @@ if run_btn:
         st.write(f"MSE: {metrics['mse']:.6f}")
         st.write(f"NC: {metrics['nc']:.4f}")
         st.write(f"LPIPS: {metrics['lpips']:.4f}")
-         # ==== Download tombol untuk ACO ====
-        
 
         st.markdown("---")
 # =========================
@@ -444,9 +435,5 @@ if run_btn:
 
 if __name__ == "__main__":
     mp.freeze_support()
-
-
-
-
 
 
