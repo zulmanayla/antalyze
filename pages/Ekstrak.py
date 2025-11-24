@@ -3,6 +3,9 @@ from PIL import Image
 import base64
 from stegano import lsb
 import io
+from aco_model import ACO   # ← pakai punya kamu
+import numpy as np
+
 
 # --- Convert local image to base64 ---
 def get_base64_of_image(image_path):
@@ -62,7 +65,6 @@ def try_extract_as_lsb(stego_np):
 
 
 
-
 # --- CSS: Font 1 (Quantico), Transparent Toolbar, White Subheaders ---
 st.markdown("""
     <style>
@@ -108,6 +110,8 @@ page_bg_img = f"""
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # --- Sidebar CSS ---
+# ===== Styling Sidebar + Toolbar (dengan preload font Material Icons) =====
+
 st.markdown("""
 <style>
 /* ===== Preload Material Icons agar tidak glitch ===== */
@@ -226,8 +230,7 @@ if uploaded_image:
             """,
             unsafe_allow_html=True
         )
-
-   # --- RIGHT COLUMN: Extract hidden message ---
+# --- RIGHT COLUMN: Extract hidden message ---
         with col2:
             st.markdown("""
                 <h3 style='text-align: center; color: white; font-family: Quantico; font-weight: 700; margin-bottom: 10px;'>
@@ -258,7 +261,3 @@ if uploaded_image:
                             st.warning("Tidak ditemukan pesan tersembunyi.")
                 except:
                     st.error("Error dalam proses ekstraksi gambar.")
-
-
-
-
